@@ -115,7 +115,6 @@ function App() {
     function onScrolls() {
       setScroll(scroll + 1)
     }
-
     return (
       <div
         onScroll={onScrolls}
@@ -146,6 +145,8 @@ function App() {
     const [myCount, setMyCount] = useState('')
 
     const [user, setUser] = useState([])
+
+    // useEffect second argument er er kaj  hoccho second argument er kono data change hole use effect abar call hobe 
 
     useEffect(() => {
       fetch('https://jsonplaceholder.typicode.com/users')
