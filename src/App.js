@@ -143,6 +143,8 @@ function App() {
 
 
   function Users() {
+    const [myCount, setMyCount] = useState('')
+
     const [user, setUser] = useState([])
 
     useEffect(() => {
@@ -153,9 +155,16 @@ function App() {
         })
     }, [])
 
+    function change(e) {
+      setMyCount(e.target.value)
+
+    }
+
     return (
       <>
         <ul>
+          <p>myCount: {myCount}</p>
+          <input onChange={change} type="text" />
           {user.map(user => {
             return <>
               <div style={{ margin: 10, padding: 10, border: '1px solid green' }}>
