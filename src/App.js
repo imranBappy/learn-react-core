@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import './App.css';
 
@@ -72,39 +72,135 @@ function App() {
   function Counter() {
     let style = { margin: 20, fontSize: 20, color: 'green', border: '1px solid blue', padding: 10 }
     const [count, setCount] = useState(0)
+    const [message, setMessage] = useState('')
+
     let handlerPlus = () => setCount(count + 1)
+
+
+
     return (
       <div>
         <h1>{count}</h1>
-        <button onClick={handlerPlus} style={style} >Plus + </button>
+
         <button onClick={() => setCount(count - 1)} style={style} >Minus - </button>
+        <button onClick={handlerPlus} style={style} >Plus + </button>
+        <button onKeyDown={() => setCount(count + 1)} > onKeyDown</button>
+        <button onKeyPress={() => setCount(count - 1)} >onKeyPress</button>
+        {(message)}
+        <textarea onCopy={() => setMessage("Text Coped!")} name="" id="" cols="30" rows="10">
+          Text Coped Text Coped Text Coped Text Coped
+      </textarea>
+
+        <textarea onCut={() => setMessage("Text Cut!")} name="" id="" cols="30" rows="10">
+          Text Cut  Text Cut  Text Cut  Text Cut  Text Cut  Text Cut  Text Cut
+      </textarea>
+        <textarea onPaste={() => setMessage("Text Paste!")} name="" id="" cols="30" rows="10">
+          Text Paste Text Paste Text Paste Text Paste Text Paste
+      </textarea>
+
+        <button onScroll={() => setCount(count + 1)} > onScroll</button>
 
       </div>
     )
   }
 
 
+
+  // window.addEventListener('scroll', () => console.log(200))
+
+  function ScrollAwareDiv() {
+
+    const [scroll, setScroll] = useState(0)
+
+    function onScrolls() {
+      setScroll(scroll + 1)
+    }
+
+    return (
+      <div
+        onScroll={onScrolls}
+        style={{
+          border: '1px solid black',
+          width: '600px',
+          height: '100px',
+          overflow: 'scroll',
+        }} >
+        <p>This demonstrates how to get the scrollTop position within a scrollable react component.</p>
+        <p>ScrollTop is {scroll}</p>
+        <p>This demonstrates how to get the scrollTop position within a scrollable react component.</p>
+        <p>ScrollTop is {scroll}</p>
+        <p>This demonstrates how to get the scrollTop position within a scrollable react component.</p>
+        <p>ScrollTop is {scroll}</p>
+        <p>This demonstrates how to get the scrollTop position within a scrollable react component.</p>
+        <p>ScrollTop is {scroll}</p>
+        <p>This demonstrates how to get the scrollTop position within a scrollable react component.</p>
+        <p>ScrollTop is {scroll}</p>
+        <p>This demonstrates how to get the scrollTop position within a scrollable react component.</p>
+        <p>ScrollTop is {scroll}</p>
+      </div>
+    )
+  }
+
+
+  function Users() {
+    const [user, setUser] = useState([])
+
+    useEffect(() => {
+      fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(data => {
+          setUser(data)
+        })
+    }, [])
+
+    return (
+      <>
+        <ul>
+          {user.map(user => {
+            return <>
+              <div style={{ margin: 10, padding: 10, border: '1px solid green' }}>
+                <ol>Name: {user.name}</ol>
+                <ol>Email: {user.email}</ol>
+                <ol>Phone: {user.phone}</ol>
+                <ol>Address: {user.address.city}</ol>
+
+              </div>
+            </>
+          })}
+        </ul>
+
+      </>
+    )
+  }
+
+
   return (
-    <div className="App">
+    <div className="App" >
+
+
+      <h3>Dynamic Users</h3>
+      <Users />
+
+      {/* <ScrollAwareDiv />
       <Counter />
       <Person person={person} />
       <Person person={person} />
       <Person person={person} />
-      <Person person={person} />
+      <Person person={person} /> */}
 
       {/* <Product product={product[0]} />
       <Product product={product[1]} />
       <Product product={product[2]} /> */}
 
-      {
+      {/* {
         product.map(p => <h1>{p.name}</h1>)
       }
 
       {
         product.map(p => <Product product={p} />)
-      }
+      } */}
 
-    </div>
+    </div >
   );
 }
 
