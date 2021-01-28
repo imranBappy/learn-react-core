@@ -1,3 +1,5 @@
+import React, { useState } from 'react'
+
 import './App.css';
 
 
@@ -64,10 +66,33 @@ function App() {
     { name: 'Nokia', price: 500, },
   ]
 
-  // let productElement = product.map(p => <Product product={p} />)
+  let productElement = product.map(p => <Product product={p} />)
+
+
+  function Counter() {
+    let style = { margin: 20, fontSize: 20, color: 'green', border: '1px solid blue', padding: 10 }
+    const [count, setCount] = useState(0)
+    let handlerPlus = () => setCount(count + 1)
+    return (
+      <div>
+        <h1>{count}</h1>
+        <button onClick={handlerPlus} style={style} >Plus + </button>
+        <button onClick={() => setCount(count - 1)} style={style} >Minus - </button>
+
+      </div>
+    )
+  }
+
 
   return (
     <div className="App">
+
+
+      <Counter />
+
+
+
+
       <Person person={person} />
       <Person person={person} />
       <Person person={person} />
