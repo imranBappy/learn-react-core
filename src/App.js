@@ -81,6 +81,10 @@ function App() {
         product.map(p => <h1>{p.name}</h1>)
       }
 
+      {
+        product.map(p => <Product product={p} />)
+      }
+
     </div>
   );
 }
