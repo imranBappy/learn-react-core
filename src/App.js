@@ -86,13 +86,7 @@ function App() {
 
   return (
     <div className="App">
-
-
       <Counter />
-
-
-
-
       <Person person={person} />
       <Person person={person} />
       <Person person={person} />
